@@ -35,7 +35,7 @@ spec:
             priorityClasses:
               enabled: true
             storageClasses:
-              enabled: true
+              enabled: false
     instanceTemplate:
       metadata: {}
     metadata: {}
