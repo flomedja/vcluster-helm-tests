@@ -1,0 +1,23 @@
+apiVersion: management.loft.sh/v1
+kind: VirtualClusterInstance
+metadata:
+  name: {{ .Values.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  networkPeer: {{ .Values.networkPeer }}
+  owner:
+    user: {{ .Values.owner.user }}
+  template:
+    accessPoint:
+      ingress: {}
+    helmRelease:
+      chart:
+        version: {{ .Values.helmRelease.chart.version | quote }}
+      values: |
+{{ .Values.helmRelease.values | toYaml | indent 8 }}
+    instanceTemplate:
+      metadata: {}
+    metadata: {}
+    pro: {}
+    spaceTemplate:
+      metadata: {}

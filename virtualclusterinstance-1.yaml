@@ -1,0 +1,44 @@
+apiVersion: management.loft.sh/v1
+kind: VirtualClusterInstance
+metadata:
+  name: test-vcluster-cli
+  namespace: p-argotest
+spec:
+  networkPeer: true
+  owner:
+    user: admin
+  template:
+    accessPoint:
+      ingress: {}
+    helmRelease:
+      chart:
+        version: 0.32.1
+      values: |
+        controlPlane:
+          distro:
+            k8s:
+              image:
+                tag: v1.35.0
+        sync:
+          fromHost:
+            csiDrivers:
+              enabled: false
+            csiStorageCapacities:
+              enabled: false
+            nodes:
+              enabled: true
+              selector:
+                all: true
+          toHost:
+            persistentVolumes:
+              enabled: true
+            priorityClasses:
+              enabled: true
+            storageClasses:
+              enabled: true
+    instanceTemplate:
+      metadata: {}
+    metadata: {}
+    pro: {}
+    spaceTemplate:
+      metadata: {}

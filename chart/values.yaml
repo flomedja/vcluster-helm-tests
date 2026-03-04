@@ -1,0 +1,34 @@
+name: test-vcluster-cli
+namespace: p-argotest
+
+networkPeer: true
+
+owner:
+  user: admin
+
+helmRelease:
+  chart:
+    version: 0.32.1
+  values:
+    controlPlane:
+      distro:
+        k8s:
+          image:
+            tag: v1.35.0
+    sync:
+      fromHost:
+        csiDrivers:
+          enabled: false
+        csiStorageCapacities:
+          enabled: false
+        nodes:
+          enabled: true
+          selector:
+            all: true
+      toHost:
+        persistentVolumes:
+          enabled: true
+        priorityClasses:
+          enabled: true
+        storageClasses:
+          enabled: true

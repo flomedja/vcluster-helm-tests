@@ -1,0 +1,5 @@
+apiVersion: v2
+name: vcluster-instance
+description: Helm chart to deploy a loft VirtualClusterInstance
+type: application
+version: 0.1.0
