@@ -3,6 +3,8 @@ kind: VirtualClusterInstance
 metadata:
   name: {{ .Values.name }}
   namespace: {{ .Values.namespace }}
+  finalizers:
+    - loft.sh/not-delete-after-auto-delete
 spec:
   networkPeer: {{ .Values.networkPeer }}
   owner:
