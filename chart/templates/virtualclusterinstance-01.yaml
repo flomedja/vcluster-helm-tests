@@ -1,8 +1,10 @@
 apiVersion: management.loft.sh/v1
 kind: VirtualClusterInstance
 metadata:
-  name: {{ .Values.name }}-02
+  name: {{ .Values.name }}-01
   namespace: {{ .Values.namespace }}
+  finalizers:
+    - loft.sh/not-delete-after-auto-delete
 spec:
   networkPeer: {{ .Values.networkPeer }}
   owner:
