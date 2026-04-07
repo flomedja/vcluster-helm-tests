@@ -1,25 +1,25 @@
-# apiVersion: management.loft.sh/v1
-# kind: VirtualClusterInstance
-# metadata:
-#   name: {{ .Values.name }}-02
-#   namespace: {{ .Values.namespace }}
-#   # finalizers:
-#   #   - loft.sh/not-delete-after-auto-delete
-# spec:
-#   networkPeer: {{ .Values.networkPeer }}
-#   owner:
-#     user: {{ .Values.owner.user }}
-#   template:
-#     accessPoint:
-#       ingress: {}
-#     helmRelease:
-#       chart:
-#         version: {{ .Values.helmRelease.chart.version | quote }}
-#       values: |
-# {{ .Values.helmRelease.values | toYaml | indent 8 }}
-#     instanceTemplate:
-#       metadata: {}
-#     metadata: {}
-#     pro: {}
-#     spaceTemplate:
-#       metadata: {}
+apiVersion: management.loft.sh/v1
+kind: VirtualClusterInstance
+metadata:
+  name: {{ .Values.name }}-02
+  namespace: {{ .Values.namespace }}
+  # finalizers:
+  #   - loft.sh/not-delete-after-auto-delete
+spec:
+  networkPeer: {{ .Values.networkPeer }}
+  owner:
+    user: {{ .Values.owner.user }}
+  template:
+    accessPoint:
+      ingress: {}
+    helmRelease:
+      chart:
+        version: {{ .Values.helmRelease.chart.version | quote }}
+      values: |
+{{ .Values.helmRelease.values | toYaml | indent 8 }}
+    instanceTemplate:
+      metadata: {}
+    metadata: {}
+    pro: {}
+    spaceTemplate:
+      metadata: {}
