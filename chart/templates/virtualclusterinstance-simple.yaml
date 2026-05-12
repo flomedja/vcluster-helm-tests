@@ -1,10 +1,8 @@
 apiVersion: management.loft.sh/v1
 kind: VirtualClusterInstance
 metadata:
-  name: {{ .Values.name }}-02
+  name: {{ .Values.name }}-simple
   namespace: {{ .Values.namespace }}
-  # finalizers:
-  #   - loft.sh/not-delete-after-auto-delete
 spec:
   networkPeer: {{ .Values.networkPeer }}
   owner:
@@ -16,7 +14,7 @@ spec:
       chart:
         version: {{ .Values.helmRelease.chart.version | quote }}
       values: |
-{{ .Values.helmRelease.values | toYaml | indent 8 }}
+        {{ .Values.helmRelease.values | toYaml | nindent 8 | trim }}
     instanceTemplate:
       metadata: {}
     metadata: {}

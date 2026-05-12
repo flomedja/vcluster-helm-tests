@@ -1,5 +1,5 @@
 name: test-vcluster-cli
-namespace: p-argotest
+namespace: default
 
 networkPeer: true
 
@@ -32,3 +32,16 @@ helmRelease:
           enabled: true
         storageClasses:
           enabled: true
+
+argocdApplicationTemplate:
+  enabled: true
+
+argocdApp:
+  namespace: argocd
+  project: default
+  source:
+    repoURL: ""
+    targetRevision: HEAD
+    path: chart/
+  destination:
+    server: https://kubernetes.default.svc

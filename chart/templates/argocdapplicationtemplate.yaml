@@ -1,0 +1,29 @@
+{{- if .Values.argocdApplicationTemplate.enabled }}
+apiVersion: management.loft.sh/v1
+kind: ArgoCDApplicationTemplate
+metadata:
+  name: {{ .Values.name }}-nginx
+spec:
+  displayName: Nginx
+  description: Deploys nginx from Bitnami chart into a tenant cluster
+  template:
+    spec:
+      source:
+        repoURL: https://charts.bitnami.com/bitnami
+        targetRevision: '*'
+        chart: nginx
+        helm:
+          releaseName: nginx
+          values: |
+            service:
+              type: ClusterIP
+      destination:
+        namespace: nginx
+      project: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+{{- end }}
