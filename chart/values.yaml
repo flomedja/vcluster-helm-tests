@@ -35,13 +35,3 @@ helmRelease:
 
 argocdApplicationTemplate:
   enabled: true
-
-argocdApp:
-  namespace: argocd
-  project: default
-  source:
-    repoURL: ""
-    targetRevision: HEAD
-    path: chart/
-  destination:
-    server: https://kubernetes.default.svc

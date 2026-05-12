@@ -2,7 +2,7 @@
 apiVersion: management.loft.sh/v1
 kind: ArgoCDApplicationTemplate
 metadata:
-  name: {{ .Values.name }}-nginx
+  name: helm-nginx-test
 spec:
   displayName: Nginx
   description: Deploys nginx from Bitnami chart into a tenant cluster
