@@ -1,0 +1,25 @@
+{{- if .Values.certManager.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  namespace: {{ .Release.Namespace }}
+spec:
+  source:
+    repoURL: {{ .Values.certManager.repoURL }}
+    targetRevision: {{ .Values.certManager.version | quote }}
+    chart: {{ .Values.certManager.chart }}
+    helm:
+      values: |
+        crds:
+          enabled: {{ .Values.certManager.installCRDs }}
+  destination:
+    namespace: {{ .Values.certManager.destination.namespace }}
+  project: {{ .Values.certManager.project }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+{{- end }}

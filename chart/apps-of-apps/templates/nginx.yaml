@@ -1,0 +1,25 @@
+{{- if .Values.nginx.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx
+  namespace: {{ .Release.Namespace }}
+spec:
+  source:
+    repoURL: {{ .Values.nginx.repoURL }}
+    targetRevision: {{ .Values.nginx.targetRevision | quote }}
+    chart: {{ .Values.nginx.chart }}
+    helm:
+      releaseName: {{ .Values.nginx.releaseName }}
+      values: |
+        {{- .Values.nginx.values | trim | nindent 8 }}
+  destination:
+    namespace: {{ .Values.nginx.destination.namespace }}
+  project: {{ .Values.nginx.project }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+{{- end }}

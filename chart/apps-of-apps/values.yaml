@@ -1,0 +1,27 @@
+# Values for the embedded ArgoCD Applications.
+# Each key below maps to one Application and can be overridden from the
+# parent chart via the `apps-of-apps:` section in the parent values.yaml.
+
+nginx:
+  enabled: true
+  repoURL: https://charts.bitnami.com/bitnami
+  targetRevision: '*'
+  chart: nginx
+  releaseName: nginx
+  values: |
+    service:
+      type: ClusterIP
+  destination:
+    namespace: nginx
+  project: default
+
+certManager:
+  enabled: true
+  repoURL: https://charts.jetstack.io
+  # targetRevision of the cert-manager chart
+  version: v1.14.5
+  installCRDs: true
+  chart: cert-manager
+  destination:
+    namespace: cert-manager
+  project: default
